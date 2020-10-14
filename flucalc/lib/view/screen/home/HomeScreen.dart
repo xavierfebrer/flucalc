@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flucalc/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,8 +30,42 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var backgroundColor = Theme.of(context).accentColor;
-    var body = Container(
+    return Scaffold(
+      backgroundColor: Theme.of(context).accentColor,
+      appBar: getHomeAppBar(),
+      body: getHomeBody(),
+    );
+  }
+
+  Widget getHomeAppBar() {
+    return AppBar(
+      title: Text(
+        Constant.APP_NAME,
+        style: TextStyle(
+          color: Constant.COLOR_TEXT_DARK,
+        ),
+      ),
+      centerTitle: false,
+      elevation: 0,
+      backgroundColor: Theme.of(context).accentColor,
+      shadowColor: Theme.of(context).accentColor,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.share,
+            color: Constant.COLOR_TEXT_DARK,
+          ),
+          onPressed: () {
+            onInputShare();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget getHomeBody() {
+    return SafeArea(
+        child: Container(
       padding: EdgeInsets.all(Constant.PADDING_CALC_BORDER),
       child: Center(
         child: Column(
@@ -42,88 +77,88 @@ class _HomeScreenState extends State<HomeScreen> {
             getCalcScreenBottom(),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton1x1(Constant.SYMBOL_BACK, (symbol) {
+              getCalcButton(Constant.SYMBOL_BACK, 1, (symbol) {
                 onInputBack();
               }, isBackEnabled(), Constant.COLOR_DISABLED, Constant.COLOR_EXTRA_2, Constant.COLOR_TEXT_LIGHT, Constant.COLOR_TEXT_DARK, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_CLEAR, (symbol) {
+              getCalcButton(Constant.SYMBOL_CLEAR, 1, (symbol) {
                 onInputClear();
               }, false, Constant.COLOR_EXTRA_2, Constant.COLOR_EXTRA_2_SELECTED, Constant.COLOR_TEXT_DARK),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_INVERT, (symbol) {
+              getCalcButton(Constant.SYMBOL_INVERT, 1, (symbol) {
                 onInputInvert();
               }, isCurrentInputNegative(), Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_DIVISION, (symbol) {
+              getCalcButton(Constant.SYMBOL_DIVISION, 1, (symbol) {
                 onInputDivide();
               }, currentOperation == MathOperation.DIVISION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED)
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_7, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_7, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_8, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_8, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_9, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_9, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_ADDITION, (symbol) {
+              getCalcButton(Constant.SYMBOL_ADDITION, 1, (symbol) {
                 onInputPlus();
               }, currentOperation == MathOperation.ADDITION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED)
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_4, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_4, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_5, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_5, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_6, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_6, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_SUBSTRACTION, (symbol) {
+              getCalcButton(Constant.SYMBOL_SUBSTRACTION, 1, (symbol) {
                 onInputMinus();
               }, currentOperation == MathOperation.SUBSTRACTION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_1, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_1, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_2, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_2, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_NUMBER_3, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_3, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_MULTIPLICATION, (symbol) {
+              getCalcButton(Constant.SYMBOL_MULTIPLICATION, 1, (symbol) {
                 onInputMultiply();
               }, currentOperation == MathOperation.MULTIPLICATION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton2x1(Constant.SYMBOL_NUMBER_0, (symbol) {
+              getCalcButton(Constant.SYMBOL_NUMBER_0, 2, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.DECIMAL_SEPARATOR, (symbol) {
+              getCalcButton(Constant.DECIMAL_SEPARATOR, 1, (symbol) {
                 onInputDecimalSymbol();
               }, getCurrentInput().contains(Constant.DECIMAL_SEPARATOR), null, Constant.COLOR_DISABLED, Constant.COLOR_TEXT_LIGHT,
                   Constant.COLOR_TEXT_LIGHT, false),
               getCalcItemsPadding(),
-              getCalcButton1x1(Constant.SYMBOL_RESULT, (symbol) {
+              getCalcButton(Constant.SYMBOL_RESULT, 1, (symbol) {
                 onInputResult();
               }, false, Constant.COLOR_EXTRA_2, Constant.COLOR_EXTRA_2_SELECTED, Constant.COLOR_TEXT_DARK),
             ]),
@@ -131,8 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    );
-    return Scaffold(backgroundColor: backgroundColor, body: SafeArea(child: body));
+    ));
   }
 
   Widget getCalcScreenTop([Color colorText = Constant.COLOR_TEXT_DARK]) {
@@ -204,6 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Padding getCalcItemsPadding() => Padding(padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS));
+
   Widget getCalcRow(List<Widget> children) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -212,9 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Padding getCalcItemsPadding() => Padding(padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS));
-
-  Widget getCalcButton1x1(String text, Function(String) callback,
+  Widget getCalcButton(String text, int rowSpaces, Function(String) callback,
       [bool selected = false,
       Color colorBG,
       Color colorBGSelected,
@@ -253,52 +287,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      flex: 1,
+      flex: rowSpaces,
     );
   }
 
-  Widget getCalcButton2x1(String text, Function(String) callback,
-      [bool selected = false,
-      Color colorBG,
-      Color colorBGSelected,
-      Color colorText = Constant.COLOR_TEXT_LIGHT,
-      Color colorTextSelected = Constant.COLOR_TEXT_LIGHT,
-      bool bold = true]) {
-    var fontWeight;
-    var bg;
-    var textColor;
-    if (selected) {
-      if (bold) {
-        fontWeight = FontWeight.bold;
-      } else {
-        fontWeight = FontWeight.normal;
-      }
-      bg = colorBGSelected;
-      textColor = colorTextSelected;
-    } else {
-      fontWeight = FontWeight.normal;
-      bg = colorBG;
-      textColor = colorText;
-    }
-    return Expanded(
-      child: Container(
-        height: 80,
-        child: RawMaterialButton(
-          onPressed: () {
-            callback(text);
-          },
-          fillColor: bg ??= Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99999)),
-          child: Text(
-            text,
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 33, color: textColor, fontWeight: fontWeight),
-          ),
-        ),
-      ),
-      flex: 2,
-    );
-  }
+  String getOutput() =>
+      getOutputFirst() + (currentOperation != null ? " ${getSymbol(currentOperation)} " : Constant.EMPTY_STRING) + getOutputSecond();
 
   String getOutputFirst() {
     if (firstInput.isNotEmpty) {
@@ -432,6 +426,8 @@ class _HomeScreenState extends State<HomeScreen> {
     updateOutput();
   }
 
+  void onInputShare() => Share.share(getOutput());
+
   void updateOutput() {
     setState(() {});
   }
@@ -478,13 +474,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String getSymbol(MathOperation operation) {
     if (currentOperation == MathOperation.ADDITION) {
-      return " ${Constant.SYMBOL_ADDITION} ";
+      return Constant.SYMBOL_ADDITION;
     } else if (currentOperation == MathOperation.SUBSTRACTION) {
-      return " ${Constant.SYMBOL_SUBSTRACTION} ";
+      return Constant.SYMBOL_SUBSTRACTION;
     } else if (currentOperation == MathOperation.MULTIPLICATION) {
-      return " ${Constant.SYMBOL_MULTIPLICATION} ";
+      return Constant.SYMBOL_MULTIPLICATION;
     } else if (currentOperation == MathOperation.DIVISION) {
-      return " ${Constant.SYMBOL_DIVISION} ";
+      return Constant.SYMBOL_DIVISION;
     }
     return Constant.EMPTY_STRING;
   }

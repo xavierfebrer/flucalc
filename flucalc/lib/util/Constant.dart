@@ -40,5 +40,6 @@ class Constant {
   static const Color COLOR_TEXT_DARK = Color(0xFF212121);
   static const double PADDING_CALC_BORDER = 7.0;
   static const double PADDING_CALC_ITEMS = 5.0;
-
 }
+
+enum MathOperation { ADDITION, SUBSTRACTION, MULTIPLICATION, DIVISION }
