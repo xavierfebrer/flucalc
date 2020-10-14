@@ -1,4 +1,4 @@
-package com.vgsnarley.flucalc
+package com.hack2s.flucalc
 
 import io.flutter.embedding.android.FlutterActivity
 
