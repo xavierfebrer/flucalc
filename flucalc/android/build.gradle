@@ -18,11 +18,6 @@ def getSignAliasPassword(String file) {
     return properties.getProperty("KEY_PASSWORD")
 }
 
-def getVersionName(String file) {
-    Properties properties = readFile(file)
-    return properties.getProperty("T21_APP_VERSION")
-}
-
 def readFile(String file) {
     Properties properties = new Properties()
     properties.load(project.rootProject.file(file).newDataInputStream())
