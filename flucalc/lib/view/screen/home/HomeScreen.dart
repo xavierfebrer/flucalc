@@ -2,14 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flucalc/util/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
-enum MathOperation { ADDITION, SUBSTRACTION, MULTIPLICATION, DIVISION }
 
 class _HomeScreenState extends State<HomeScreen> {
   String firstInput = Constant.EMPTY_STRING;
@@ -49,17 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
       elevation: 0,
       backgroundColor: Theme.of(context).accentColor,
       shadowColor: Theme.of(context).accentColor,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.share,
-            color: Constant.COLOR_TEXT_DARK,
-          ),
-          onPressed: () {
-            onInputShare();
-          },
-        ),
-      ],
     );
   }
 
@@ -291,9 +277,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  String getOutput() =>
-      getOutputFirst() + (currentOperation != null ? " ${getSymbol(currentOperation)} " : Constant.EMPTY_STRING) + getOutputSecond();
-
   String getOutputFirst() {
     if (firstInput.isNotEmpty) {
       return firstInput;
@@ -425,8 +408,6 @@ class _HomeScreenState extends State<HomeScreen> {
     secondInput = Constant.EMPTY_STRING;
     updateOutput();
   }
-
-  void onInputShare() => Share.share(getOutput());
 
   void updateOutput() {
     setState(() {});
