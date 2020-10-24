@@ -29,23 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).accentColor,
-      appBar: getHomeAppBar(),
       body: getHomeBody(),
-    );
-  }
-
-  Widget getHomeAppBar() {
-    return AppBar(
-      title: Text(
-        Constant.APP_NAME,
-        style: TextStyle(
-          color: Constant.COLOR_TEXT_DARK,
-        ),
-      ),
-      centerTitle: false,
-      elevation: 0,
-      backgroundColor: Theme.of(context).accentColor,
-      shadowColor: Theme.of(context).accentColor,
     );
   }
 

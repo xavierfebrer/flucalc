@@ -1,8 +1,14 @@
 import 'package:flucalc/util/Constant.dart';
 import 'package:flucalc/view/screen/home/HomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(FluCalcApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(FluCalcApp());
+  });
+}
 
 class FluCalcApp extends StatelessWidget {
   @override
