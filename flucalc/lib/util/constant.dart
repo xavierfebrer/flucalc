@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class Constant {
+class FlucalcConstant {
   static const String EMPTY_STRING = "";
   static const String APP_NAME = "Flucalc";
   static const int DELAY_SPLASH_SCREEN = 1600;

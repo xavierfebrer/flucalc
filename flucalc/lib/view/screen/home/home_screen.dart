@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flucalc/util/Constant.dart';
+import 'package:flucalc/util/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,18 +9,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String firstInput = Constant.EMPTY_STRING;
-  String secondInput = Constant.EMPTY_STRING;
-  MathOperation currentOperation;
-
-  Widget output;
+  String firstInput = FlucalcConstant.EMPTY_STRING;
+  String secondInput = FlucalcConstant.EMPTY_STRING;
+  MathOperation? currentOperation;
 
   @override
   void initState() {
     super.initState();
-    firstInput = Constant.EMPTY_STRING;
-    secondInput = Constant.EMPTY_STRING;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    firstInput = FlucalcConstant.EMPTY_STRING;
+    secondInput = FlucalcConstant.EMPTY_STRING;
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       updateOutput();
     });
   }
@@ -28,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: getHomeBody(),
     );
   }
@@ -36,101 +34,101 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget getHomeBody() {
     return SafeArea(
         child: Container(
-      padding: EdgeInsets.all(Constant.PADDING_CALC_BORDER),
+      padding: EdgeInsets.all(FlucalcConstant.PADDING_CALC_BORDER),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             getCalcScreenTop(),
-            getCalcScreenMid(Constant.COLOR_EXTRA_SELECTED),
+            getCalcScreenMid(FlucalcConstant.COLOR_EXTRA_SELECTED),
             getCalcScreenBottom(),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton(Constant.SYMBOL_BACK, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_BACK, 1, (symbol) {
                 onInputBack();
-              }, isBackEnabled(), Constant.COLOR_DISABLED, Constant.COLOR_EXTRA_2, Constant.COLOR_TEXT_LIGHT, Constant.COLOR_TEXT_DARK, false),
+              }, isBackEnabled(), FlucalcConstant.COLOR_DISABLED, FlucalcConstant.COLOR_EXTRA_2, FlucalcConstant.COLOR_TEXT_LIGHT, FlucalcConstant.COLOR_TEXT_DARK, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_CLEAR, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_CLEAR, 1, (symbol) {
                 onInputClear();
-              }, false, Constant.COLOR_EXTRA_2, Constant.COLOR_EXTRA_2_SELECTED, Constant.COLOR_TEXT_DARK),
+              }, false, FlucalcConstant.COLOR_EXTRA_2, FlucalcConstant.COLOR_EXTRA_2_SELECTED, FlucalcConstant.COLOR_TEXT_DARK),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_INVERT, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_INVERT, 1, (symbol) {
                 onInputInvert();
-              }, isCurrentInputNegative(), Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
+              }, isCurrentInputNegative(), FlucalcConstant.COLOR_EXTRA, FlucalcConstant.COLOR_EXTRA_SELECTED),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_DIVISION, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_DIVISION, 1, (symbol) {
                 onInputDivide();
-              }, currentOperation == MathOperation.DIVISION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED)
+              }, currentOperation == MathOperation.DIVISION, FlucalcConstant.COLOR_EXTRA, FlucalcConstant.COLOR_EXTRA_SELECTED)
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton(Constant.SYMBOL_NUMBER_7, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_7, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_8, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_8, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_9, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_9, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_ADDITION, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_ADDITION, 1, (symbol) {
                 onInputPlus();
-              }, currentOperation == MathOperation.ADDITION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED)
+              }, currentOperation == MathOperation.ADDITION, FlucalcConstant.COLOR_EXTRA, FlucalcConstant.COLOR_EXTRA_SELECTED)
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton(Constant.SYMBOL_NUMBER_4, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_4, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_5, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_5, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_6, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_6, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_SUBSTRACTION, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_SUBSTRACTION, 1, (symbol) {
                 onInputMinus();
-              }, currentOperation == MathOperation.SUBSTRACTION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
+              }, currentOperation == MathOperation.SUBSTRACTION, FlucalcConstant.COLOR_EXTRA, FlucalcConstant.COLOR_EXTRA_SELECTED),
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton(Constant.SYMBOL_NUMBER_1, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_1, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_2, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_2, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_NUMBER_3, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_3, 1, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_MULTIPLICATION, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_MULTIPLICATION, 1, (symbol) {
                 onInputMultiply();
-              }, currentOperation == MathOperation.MULTIPLICATION, Constant.COLOR_EXTRA, Constant.COLOR_EXTRA_SELECTED),
+              }, currentOperation == MathOperation.MULTIPLICATION, FlucalcConstant.COLOR_EXTRA, FlucalcConstant.COLOR_EXTRA_SELECTED),
             ]),
             getCalcItemsPadding(),
             getCalcRow([
-              getCalcButton(Constant.SYMBOL_NUMBER_0, 2, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_NUMBER_0, 2, (symbol) {
                 onInputNumber(symbol);
               }, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.DECIMAL_SEPARATOR, 1, (symbol) {
+              getCalcButton(FlucalcConstant.DECIMAL_SEPARATOR, 1, (symbol) {
                 onInputDecimalSymbol();
-              }, getCurrentInput().contains(Constant.DECIMAL_SEPARATOR), null, Constant.COLOR_DISABLED, Constant.COLOR_TEXT_LIGHT,
-                  Constant.COLOR_TEXT_LIGHT, false),
+              }, getCurrentInput().contains(FlucalcConstant.DECIMAL_SEPARATOR), null, FlucalcConstant.COLOR_DISABLED, FlucalcConstant.COLOR_TEXT_LIGHT,
+                  FlucalcConstant.COLOR_TEXT_LIGHT, false),
               getCalcItemsPadding(),
-              getCalcButton(Constant.SYMBOL_RESULT, 1, (symbol) {
+              getCalcButton(FlucalcConstant.SYMBOL_RESULT, 1, (symbol) {
                 onInputResult();
-              }, false, Constant.COLOR_EXTRA_2, Constant.COLOR_EXTRA_2_SELECTED, Constant.COLOR_TEXT_DARK),
+              }, false, FlucalcConstant.COLOR_EXTRA_2, FlucalcConstant.COLOR_EXTRA_2_SELECTED, FlucalcConstant.COLOR_TEXT_DARK),
             ]),
             getCalcItemsPadding(),
           ],
@@ -139,13 +137,13 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Widget getCalcScreenTop([Color colorText = Constant.COLOR_TEXT_DARK]) {
+  Widget getCalcScreenTop([Color colorText = FlucalcConstant.COLOR_TEXT_DARK]) {
     return Expanded(
       child: Container(
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS),
+        padding: EdgeInsets.all(FlucalcConstant.PADDING_CALC_ITEMS),
         child: AutoSizeText(
           "${getOutputFirst()}",
           maxLines: 1,
@@ -162,13 +160,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget getCalcScreenMid([Color colorText = Constant.COLOR_TEXT_DARK]) {
+  Widget getCalcScreenMid([Color colorText = FlucalcConstant.COLOR_TEXT_DARK]) {
     return Expanded(
       child: Container(
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS),
+        padding: EdgeInsets.all(FlucalcConstant.PADDING_CALC_ITEMS),
         child: AutoSizeText(
           "  ${getSymbol(currentOperation)}  ",
           maxLines: 1,
@@ -185,13 +183,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget getCalcScreenBottom([Color colorText = Constant.COLOR_TEXT_DARK]) {
+  Widget getCalcScreenBottom([Color colorText = FlucalcConstant.COLOR_TEXT_DARK]) {
     return Expanded(
       child: Container(
         width: double.infinity,
         height: double.infinity,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS),
+        padding: EdgeInsets.all(FlucalcConstant.PADDING_CALC_ITEMS),
         child: AutoSizeText(
           "${getOutputSecond()}",
           maxLines: 1,
@@ -208,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Padding getCalcItemsPadding() => Padding(padding: EdgeInsets.all(Constant.PADDING_CALC_ITEMS));
+  Padding getCalcItemsPadding() => Padding(padding: EdgeInsets.all(FlucalcConstant.PADDING_CALC_ITEMS));
 
   Widget getCalcRow(List<Widget> children) {
     return Row(
@@ -220,10 +218,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget getCalcButton(String text, int rowSpaces, Function(String) callback,
       [bool selected = false,
-      Color colorBG,
-      Color colorBGSelected,
-      Color colorText = Constant.COLOR_TEXT_LIGHT,
-      Color colorTextSelected = Constant.COLOR_TEXT_LIGHT,
+      Color? colorBG,
+      Color? colorBGSelected,
+      Color colorText = FlucalcConstant.COLOR_TEXT_LIGHT,
+      Color colorTextSelected = FlucalcConstant.COLOR_TEXT_LIGHT,
       bool bold = true]) {
     var fontWeight;
     var bg;
@@ -265,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (firstInput.isNotEmpty) {
       return firstInput;
     } else {
-      return "${Constant.DEFAULT_EMPTY_VALUE}";
+      return "${FlucalcConstant.DEFAULT_EMPTY_VALUE}";
     }
   }
 
@@ -273,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (secondInput.isNotEmpty) {
       return secondInput;
     }
-    return Constant.EMPTY_STRING;
+    return FlucalcConstant.EMPTY_STRING;
   }
 
   String getCurrentInput() {
@@ -288,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       num.parse(input);
     } catch (e) {
-      input = Constant.EMPTY_STRING;
+      input = FlucalcConstant.EMPTY_STRING;
     }
     input = removeStartZeroesIfOptional(input);
     if (currentOperation == null) {
@@ -301,11 +299,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onInputDecimalSymbol() {
     var input = getCurrentInput();
-    if (!input.contains(Constant.DECIMAL_SEPARATOR)) {
+    if (!input.contains(FlucalcConstant.DECIMAL_SEPARATOR)) {
       if (input.isEmpty) {
-        input = "${Constant.INTEGER_STARTING_OPTIONAL}${Constant.DECIMAL_SEPARATOR}";
+        input = "${FlucalcConstant.INTEGER_STARTING_OPTIONAL}${FlucalcConstant.DECIMAL_SEPARATOR}";
       } else {
-        input += Constant.DECIMAL_SEPARATOR;
+        input += FlucalcConstant.DECIMAL_SEPARATOR;
       }
       setCurrentInput(input);
     }
@@ -324,8 +322,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onInputClear() {
     currentOperation = null;
-    firstInput = Constant.EMPTY_STRING;
-    secondInput = Constant.EMPTY_STRING;
+    firstInput = FlucalcConstant.EMPTY_STRING;
+    secondInput = FlucalcConstant.EMPTY_STRING;
     updateOutput();
   }
 
@@ -334,13 +332,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void onInputInvert() {
     var input = getCurrentInput();
     if (input.isNotEmpty) {
-      if (input.startsWith(Constant.SYMBOL_SUBSTRACTION)) {
+      if (input.startsWith(FlucalcConstant.SYMBOL_SUBSTRACTION)) {
         setCurrentInput(input.substring(1));
       } else {
-        setCurrentInput(Constant.SYMBOL_SUBSTRACTION + input);
+        setCurrentInput(FlucalcConstant.SYMBOL_SUBSTRACTION + input);
       }
     } else {
-      setCurrentInput(Constant.SYMBOL_SUBSTRACTION + "${Constant.INTEGER_STARTING_OPTIONAL}");
+      setCurrentInput(FlucalcConstant.SYMBOL_SUBSTRACTION + "${FlucalcConstant.INTEGER_STARTING_OPTIONAL}");
     }
   }
 
@@ -366,12 +364,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onInputResult() {
     setFirstValueIfEmpty();
-    var firstValue = Constant.INTEGER_STARTING_OPTIONAL;
+    num firstValue = FlucalcConstant.INTEGER_STARTING_OPTIONAL;
     var secondValue;
     try {
       firstValue = num.parse(firstInput);
     } catch (e) {
-      firstValue = Constant.INTEGER_STARTING_OPTIONAL;
+      firstValue = FlucalcConstant.INTEGER_STARTING_OPTIONAL;
     }
     try {
       secondValue = num.parse(secondInput);
@@ -389,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     firstInput = removeDecimalIfOptional(firstInput);
     currentOperation = null;
-    secondInput = Constant.EMPTY_STRING;
+    secondInput = FlucalcConstant.EMPTY_STRING;
     updateOutput();
   }
 
@@ -398,11 +396,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String removeStartZeroesIfOptional(String number) {
-    var startNegative = number.startsWith(Constant.SYMBOL_SUBSTRACTION);
+    var startNegative = number.startsWith(FlucalcConstant.SYMBOL_SUBSTRACTION);
     var startIndex = (startNegative ? 2 : 1);
     var startingPattern =
-        startNegative ? Constant.SYMBOL_SUBSTRACTION + "${Constant.INTEGER_STARTING_OPTIONAL}" : "${Constant.INTEGER_STARTING_OPTIONAL}";
-    while (number.startsWith(startingPattern) && number.length > startIndex && number[startIndex] != Constant.DECIMAL_SEPARATOR) {
+        startNegative ? FlucalcConstant.SYMBOL_SUBSTRACTION + "${FlucalcConstant.INTEGER_STARTING_OPTIONAL}" : "${FlucalcConstant.INTEGER_STARTING_OPTIONAL}";
+    while (number.startsWith(startingPattern) && number.length > startIndex && number[startIndex] != FlucalcConstant.DECIMAL_SEPARATOR) {
       if (startNegative) {
         number = number.substring(0, 1) + number.substring(2);
       } else {
@@ -413,21 +411,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String removeDecimalIfOptional(String number) {
-    while ((number.indexOf(Constant.DECIMAL_SEPARATOR) < number.length - 1 &&
-            number.indexOf(Constant.DECIMAL_SEPARATOR) >= 0 &&
-            number.endsWith("${Constant.DECIMAL_ENDING_OPTIONAL}")) ||
-        number.endsWith(Constant.DECIMAL_SEPARATOR)) {
+    while ((number.indexOf(FlucalcConstant.DECIMAL_SEPARATOR) < number.length - 1 &&
+            number.indexOf(FlucalcConstant.DECIMAL_SEPARATOR) >= 0 &&
+            number.endsWith("${FlucalcConstant.DECIMAL_ENDING_OPTIONAL}")) ||
+        number.endsWith(FlucalcConstant.DECIMAL_SEPARATOR)) {
       number = number.substring(0, number.length - 1);
     }
     return number;
   }
 
   void setFirstValueIfEmpty() {
-    if (firstInput.isEmpty) firstInput = "${Constant.DEFAULT_EMPTY_VALUE}";
+    if (firstInput.isEmpty) firstInput = "${FlucalcConstant.DEFAULT_EMPTY_VALUE}";
   }
 
   bool isBackEnabled() {
-    return (firstInput.isNotEmpty && firstInput != "${Constant.INTEGER_STARTING_OPTIONAL}") || currentOperation != null || secondInput.isNotEmpty;
+    return (firstInput.isNotEmpty && firstInput != "${FlucalcConstant.INTEGER_STARTING_OPTIONAL}") || currentOperation != null || secondInput.isNotEmpty;
   }
 
   bool isCurrentInputNegative() {
@@ -437,16 +435,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return false;
   }
 
-  String getSymbol(MathOperation operation) {
+  String getSymbol(MathOperation? operation) {
     if (currentOperation == MathOperation.ADDITION) {
-      return Constant.SYMBOL_ADDITION;
+      return FlucalcConstant.SYMBOL_ADDITION;
     } else if (currentOperation == MathOperation.SUBSTRACTION) {
-      return Constant.SYMBOL_SUBSTRACTION;
+      return FlucalcConstant.SYMBOL_SUBSTRACTION;
     } else if (currentOperation == MathOperation.MULTIPLICATION) {
-      return Constant.SYMBOL_MULTIPLICATION;
+      return FlucalcConstant.SYMBOL_MULTIPLICATION;
     } else if (currentOperation == MathOperation.DIVISION) {
-      return Constant.SYMBOL_DIVISION;
+      return FlucalcConstant.SYMBOL_DIVISION;
     }
-    return Constant.EMPTY_STRING;
+    return FlucalcConstant.EMPTY_STRING;
   }
 }
