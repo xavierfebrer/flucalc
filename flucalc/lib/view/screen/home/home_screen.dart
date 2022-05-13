@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     firstInput = FlucalcConstant.EMPTY_STRING;
     secondInput = FlucalcConstant.EMPTY_STRING;
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       updateOutput();
     });
   }
